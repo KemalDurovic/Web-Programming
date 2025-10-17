@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelTrust - Explore the World</title>
+    <link rel="stylesheet" href="assets/css/TravelTrust.css">
+        <!-- Spapp CSS-->
+        <link href="../frontend/assets/css/spapp.css" rel="stylesheet" media="screen"/>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <div class="logo-text">Traveltrust</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#packages">Packages</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn-login">Login</button>
+                <button class="btn-register">Sign Up</button>
+            </div>
+            <button class="space" id="space">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+
+
+     <main id="spapp" role="main">
+        <section id="home" data-load="home.html"></section>
+        <section id="about" data-load="about.html"></section>
+        <section id="destinations" data-load="destinations.html"></section>
+        <section id="packages" data-load="packages.html"></section>
+        <section id="contact" data-load="contact.html"></section>
+        <section id="login" data-load="login.html"></section>
+    </main>
+
+
+
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo-text">TravelTrust</div>
+                    <p class="footer-description">Creating unforgettable travel experiences since 2005. Your journey to extraordinary destinations starts here.</p>
+                    <div class="footer-social">
+                        <a href="" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">💼</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#destinations" class="footer-link">Destinations</a>
+                        <a href="#packages" class="footer-link">Travel Packages</a>
+                        <a href="#about" class="footer-link">About Us</a>
+                        <a href="#contact" class="footer-link">Contact</a>
+                        <a href="#" class="footer-link">Blog</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <div class="footer-links">
+                        <a href="https://www.skyscanner.net/"target='_blank' class="footer-link">Flight Booking</a>
+                        <a href="https://www.booking.com" target="_blank" class="footer-link">Hotel Reservation</a>
+                        <a href="#" class="footer-link">Tour Packages</a>
+                        <a href="https://tripins.io/" target="_blank" class="footer-link">Travel Insurance</a>
+                        <a href="https://www.visaonlineassistance.com/" target="_blank" class="footer-link">Visa Assistance</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <div class="footer-links">
+                        <a href="" class="footer-link">Help Center</a>
+                        <a href="" class="footer-link">Privacy Policy</a>
+                        <a href="" class="footer-link">Terms of Service</a>
+                        <a href="" class="footer-link">FAQ</a>
+                        <a href="" class="footer-link">Cancellation Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 TravelTrust Agency. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/TravelTrust.js"></script>
+        <!-- JQuery-->
+        <script src="../frontend/assets/js/jquery-3.7.1.min.js"></script>
+        <!-- JQuery Spapp-->
+        <script src="../frontend/assets/js/jquery.spapp.min.js"></script>
+        <!-- Utils-->
+    <script src="../frontend/utils/utils.js"></script>
+        <script>
+            Utils.init_spapp();
+        </script>
+</body>
+</html>
