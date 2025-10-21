@@ -57,24 +57,25 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
         const packageTabs = document.querySelectorAll('.package-tab');
         const packageCards = document.querySelectorAll('.package-card');
 
-        packageTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const category = tab.getAttribute('data-category');
-                
-                packageTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                packageCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    
-                    if (category === 'all' || cardCategory === category) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
+    document.addEventListener('click', (e) => {
+    // Only respond to package-tab buttons
+    if (!e.target.matches('.package-tab')) return;
+    
+    const category = e.target.getAttribute('data-category');
+    
+    // Update active tab
+    document.querySelectorAll('.package-tab').forEach(t => {
+        t.classList.remove('active');
+    });
+    e.target.classList.add('active');
+    
+    // Filter cards
+    document.querySelectorAll('.package-card').forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        const shouldShow = category === 'all' || cardCategory === category;
+        card.style.display = shouldShow ? 'block' : 'none';
+    });
+});
 
         // Contact form submission
         const contactForm = document.getElementById('contactForm');
