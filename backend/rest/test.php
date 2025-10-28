@@ -4,6 +4,7 @@ require_once 'dao/DestinationDao.php';
 
 $userDao = new UserDao();
 $destintionDao = new DestinationDao();
+/*$bookingDao = new BookingDao();*/
 
 
 // Insert a new user (Customer)
@@ -17,7 +18,7 @@ $userDao->insert([
    'role' => 'user',
    'created_at'=> null,
    'updated_at'=> null
-]);*/
+]);
 try {
     $userDao->insert([
         'username' => 'kemal_durovic1',
@@ -30,28 +31,34 @@ try {
     } else {
         throw $e; // Drugi error
     }
-}
+}*/
 
 
 // Insert a new order
-/*
+/*$bookingDao->insert([
+    'booking_date' => null,
+    number_of
+])*/
 $destinationDao->insert([
    'name' => 'Swiss Alps',
    'location' => 'The Alps of  Switzerland',
    'country' => ' Switzerland',
    'description' => 'Majestic mountains, pristine lakes, and charming villages await you.',
-   'image_url' => null,
+   'image_url' => 'null',
    'badge' => 'Popular',
    'price_from' => 1.299,
+   'featured' => null,
    'created_at'=> NOW(),
    'updated_at'=> null
    
-]);*/
+]);
 
 
 // Fetch all users
 $users = $userDao->getAll();
 print_r($users);
+$destintions = $destinationDaoDao->getAll();
+print_r($destintions);
 
 
 // Fetch all orders

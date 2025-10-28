@@ -8,9 +8,9 @@ class UserDao extends BaseDao {
    }
 
 
-   public function getByEmail($email) {
-       $stmt = $this->connection->prepare("SELECT * FROM packages WHERE email = :email");
-       $stmt->bindParam(':email', $email);
+   public function getByName($name) {
+       $stmt = $this->connection->prepare("SELECT * FROM packages WHERE name = :name");
+       $stmt->bindParam(':name', $name);
        $stmt->execute();
        return $stmt->fetch();
    }

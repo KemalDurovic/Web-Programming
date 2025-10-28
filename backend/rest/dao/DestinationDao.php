@@ -12,7 +12,7 @@ class DestinationDao extends BaseDao {
        $stmt = $this->connection->prepare("SELECT * FROM destinations d JOIN user_favorites uf ON uf.destination_id = d.id");
        $stmt->bindParam(':user_id', $user_id);
        $stmt->execute();
-       return $stmt->fetchAll();
+       return $stmt->fetch();
    }
 }
 ?>

@@ -1,9 +1,9 @@
 <?php
 class Database {
    private static $host = 'localhost';
-   private static $dbName = 'travel_trust';
-   private static $username = 'root';
-   private static $password = 'Fakultet123.';
+   private static $dbName = 'travel_booking';
+   private static $username = 'travel_admin';
+   private static $password = 'Travel123!';
    private static $connection = null;
 
 
