@@ -2,15 +2,15 @@
 require_once 'BaseDao.php';
 
 
-class UserDao extends BaseDao {
+class BookingDao extends BaseDao {
    public function __construct() {
        parent::__construct("bookings");
    }
 
 
-    public function getByUserId($user_id) {
-       $stmt = $this->connection->prepare("SELECT * FROM orders WHERE user_id = :user_id");
-       $stmt->bindParam(':user_id', $user_id);
+    public function getByBookingDate($booking_date) {
+       $stmt = $this->connection->prepare("SELECT * FROM bookings WHERE booking_date = :booking_date");
+       $stmt->bindParam(':booking_date', $booking_date);
        $stmt->execute();
        return $stmt->fetchAll();
    }

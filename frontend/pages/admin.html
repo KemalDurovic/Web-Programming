@@ -1,0 +1,134 @@
+ <div class="admin-wrapper">
+        <div class="admin-container">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="header-gradient">
+                    <h1>TravelTrust Admin Panel</h1>
+                    <p>Manage destinations and travel packages</p>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="admin-tabs">
+                    <button class="admin-tab active" onclick="switchTab('destinations')">Destinations</button>
+                    <button class="admin-tab" onclick="switchTab('packages')">Packages</button>
+                </div>
+            </div>
+
+            <!-- Destinations Content -->
+            <div class="admin-content active" id="destinations">
+                <div class="form-section">
+                    <h2 class="form-title">Add New Destination</h2>
+                    <div class="success-alert" id="destination-success">
+                        Destination added successfully!
+                    </div>
+                    <form id="destination-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Destination Name</label>
+                                <input type="text" class="form-input" id="dest-name" placeholder="Swiss Alps" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Location</label>
+                                <input type="text" class="form-input" id="dest-location" placeholder="Switzerland" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category Badge</label>
+                                <select class="form-select" id="dest-category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Popular">Popular</option>
+                                    <option value="Trending">Trending</option>
+                                    <option value="Cultural">Cultural</option>
+                                    <option value="Adventure">Adventure</option>
+                                    <option value="Winter">Winter</option>
+                                    <option value="Safari">Safari</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Price (From)</label>
+                                <input type="number" class="form-input" id="dest-price" placeholder="1299" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Image URL</label>
+                            <input type="url" class="form-input" id="dest-image" placeholder="https://example.com/image.jpg" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" id="dest-description" placeholder="Majestic mountains, pristine lakes, and charming villages await you." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Destination</button>
+                    </form>
+                </div>
+
+                <!-- Current Destinations -->
+                <div class="items-section">
+                    <h2 class="section-subtitle">Current Destinations</h2>
+                    <div class="items-grid" id="destinations-list">
+                        <!-- Destinations will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Packages Content -->
+            <div class="admin-content " id="packages">
+                <div class="form-section">
+                    <h2 class="form-title">Add New Package</h2>
+                    <div class="success-alert" id="package-success">
+                        Package added successfully!
+                    </div>
+                    <form id="package-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Package Name</label>
+                                <input type="text" class="form-input" id="pkg-name" placeholder="Alpine Explorer" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Duration</label>
+                                <input type="text" class="form-input" id="pkg-duration" placeholder="7 Days / 6 Nights" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" id="pkg-category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="adventure">Adventure</option>
+                                    <option value="beach">Beach</option>
+                                    <option value="cultural">Cultural</option>
+                                    <option value="luxury">Luxury</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ribbon Badge</label>
+                                <select class="form-select" id="pkg-ribbon">
+                                    <option value="">None</option>
+                                    <option value="Best Seller">Best Seller</option>
+                                    <option value="Premium">Premium</option>
+                                    <option value="Exclusive">Exclusive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Icon Emoji</label>
+                                <input type="text" class="form-input" id="pkg-icon" placeholder="🏔️" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Price</label>
+                                <input type="number" class="form-input" id="pkg-price" placeholder="1299" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Features (one per line)</label>
+                            <textarea class="form-textarea" id="pkg-features" placeholder="Mountain hiking tours&#10;Cable car experiences&#10;Local cuisine tasting&#10;Professional guide" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Package</button>
+                    </form>
+                </div>
+
+                <!-- Current Packages -->
+                <div class="items-section">
+                    <h2 class="section-subtitle">Current Packages</h2>
+                    <div class="items-grid" id="packages-list">
+                        <!-- Packages will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
