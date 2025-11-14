@@ -14,5 +14,11 @@ class UserDao extends BaseDao {
        $stmt->execute();
        return $stmt->fetch();
    }
+   public function getByRole($role) {
+    $stmt = $this->connection->prepare("SELECT * FROM users WHERE role = :role");
+    $stmt->bindParam(':role', $role);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 }
 ?>

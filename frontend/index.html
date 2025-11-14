@@ -114,5 +114,16 @@
         <script>
             Utils.init_spapp();
         </script>
+        <script>
+                function switchTab(content_id) {
+    // Sakrij sve content sekcije
+    document.querySelectorAll('.smth-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Prikaži odabranu sekciju
+    document.getElementById(content_id).classList.add('active')
+}
+        </script>
 </body>
 </html>

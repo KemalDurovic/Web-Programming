@@ -184,7 +184,7 @@
 }
 
         .hero {
-            margin-top: 80px;
+            margin-top: 4%;
             height: 90vh;
             background: linear-gradient(rgba(255, 107, 107, 0.301), rgba(78, 205, 196, 0.7)), 
                 url('../moke.jpg');
@@ -249,7 +249,6 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             animation: fadeInUp 1.4s ease;
         }
-
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
@@ -273,21 +272,40 @@
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 16px;
+            display: inline-block; /* Ključno! */
             background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-text-stroke: 0.4px #ffffff;
         }
 
         .section-subtitle {
             font-size: 18px;
-            color: #666;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: #ffffff;
             max-width: 600px;
             margin: 0 auto;
+            -webkit-text-stroke: 0.2px #ffffff;
+            border-radius: 30px 30px 30px 30px;
         }
-
+        .h2 {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600; 
+        }
         .destinations {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: url(https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWlycGxhbmV8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            max-width: 100%;
         }
 
         .destinations-grid {
@@ -393,6 +411,11 @@
 
         .packages {
             background: white;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjB3YWxscGFwZXJ8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            max-width: 100%;
         
         }
 
@@ -419,6 +442,15 @@
             border-color: #FF6B6B;
             color: #FF6B6B;
         }
+        .package-card.hidden {
+            display: none;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 420px));
+            gap: 2rem;
+        }
 
         .package-tab.active {
             background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
@@ -428,18 +460,27 @@
 
         .packages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 420px));
+            gap: 2rem;
+            justify-content: center;
+            padding: 2rem;
         }
-
+        .packages-grid[data-filtered="true"] {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 1000px;
+        }
         .package-card {
             background: white;
             border-radius: 20px;
             padding: 35px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
-            border: 2px solid transparent;
+            border: 1px solid transparent;
+            border-color: #FF6B6B;;
+            margin: bottom 15%;;
+            max-width: 420px;
+            width: 100%;
         }
 
         .package-card:hover {
@@ -530,7 +571,9 @@
         }
 
         .about .section-subtitle {
-            color: #94a3b8;
+            color: #ffffff;
+            border: 0;
+            background: transparent;
         }
 
         .stats-grid {
@@ -566,6 +609,12 @@
 
         .contact {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: url('https://watermark.lovepik.com/photo/20211121/large/lovepik-map-travel-planning-picture_500650353.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            max-width: 100%;
+            
         }
 
         .contact-content {
@@ -809,13 +858,24 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+            .packages-grid,
+                .packages-grid[data-filtered="true"] {
+                    grid-template-columns: 1fr;
+                }
         }
 
         /*ADMIN PAGES*/
         .admin-wrapper {
-            max-width: 1400px;
+            background: url('https://wallpapers.com/images/hd/travel-hd-bfuw99yd29g1ylhc.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 10%;
+            padding-bottom: 10%;
+            padding-top: 10%;
+            padding-left: 30%;
+            padding-right: 30%;
         }
 
         .admin-container {
@@ -895,6 +955,9 @@
             padding: 40px;
             border: 5%;
             border: linear-gradient(135deg, #FF6B6B, #4ECDC4);;
+        }
+        .admin .section-subtitle{
+            background: transparent;
         }
 
         .admin-content.active {
@@ -1046,3 +1109,129 @@
                 font-size: 1rem;
             }
         }
+
+
+
+        /* Admin Content Sections */
+        .smth-content {
+            display: none;
+            padding: 40px;
+            border: 5%;
+            border: linear-gradient(135deg, #FF6B6B, #4ECDC4);;
+        }
+
+        .smth-content.active {
+            display: block;
+        }
+        @media (max-width: 1400px) {
+    .admin-wrapper {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+    .packages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .admin-wrapper {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-wrapper {
+        padding: 10%;
+    }
+
+    .admin-content,
+    .smth-content {
+        padding: 20px;
+    }
+
+    .form-section {
+        padding: 24px;
+    }
+
+    .header-gradient {
+        padding: 30px 20px;
+    }
+
+    .header-gradient h1 {
+        font-size: 2rem;
+    }
+
+    .header-gradient p {
+        font-size: 1rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-tab {
+        padding: 16px 12px;
+        font-size: 0.95rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .btn-secondary,
+    .btn-delete {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-wrapper {
+        padding: 10%;
+    }
+
+    .header-gradient h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-section {
+        padding: 16px;
+    }
+
+    .admin-content,
+    .smth-content {
+        padding: 15px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .admin-tabs {
+        flex-direction: column;
+    }
+
+    .admin-tab {
+        padding: 14px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .admin-tab.active::after {
+        display: none;
+    }
+}
