@@ -8,7 +8,7 @@ require_once 'dao/ReviewDao.php';
 $reviewDao = new ReviewDao();
 $bookingDao = new BookingDao();
 $userDao = new UserDao();
-$destinationDao = new DestinationDao();
+$desnationDao = new DestinationDao();
 $packageDao = new PackageDao();
 $bookingDao = new BookingDao();
 
@@ -68,7 +68,7 @@ $test_review = [
     'created_at' => '',
     'updated_at' => ''
 ];
-/*$reviewDao->insert($test_review);
+$reviewDao->insert($test_review);
 echo '<h2>Reviews<h2>';
 $reviewDao = $reviewDao->getAll();
 print_r($reviewDao);
@@ -87,5 +87,5 @@ print_r($destinationDao);
 $userDao->insert($test_user);
 echo '<h2>Users<h2>';
 $userDao = $userDao->getAll();
-print_r($userDao); */
+print_r($userDao); 
 ?>
