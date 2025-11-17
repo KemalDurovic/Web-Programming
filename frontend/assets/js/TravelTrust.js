@@ -155,23 +155,6 @@ let packages = [
     }
 ];
 
-// Tab switching
-document.querySelectorAll('.admin-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        const category = tab.dataset.category;
-        
-        // Update active tab
-        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        // Update active content
-        document.querySelectorAll('.admin-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        document.getElementById(`${category}-section`).classList.add('active');
-    });
-});
-
 // Destination form handling
 document.getElementById('destination-form').addEventListener('submit', (e) => {
     e.preventDefault();

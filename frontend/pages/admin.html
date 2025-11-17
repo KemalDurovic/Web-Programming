@@ -9,13 +9,12 @@
                 
                 <!-- Tabs -->
                 <div class="admin-tabs">
-                    <button class="admin-tab active" onclick="switchTab('destinations')">Destinations</button>
-                    <button class="admin-tab" onclick="switchTab('packages')">Packages</button>
+                    <button class="admin-tab active" onclick="switchTab('destinations-form-admin-benjo')">Destinations</button>
+                    <button class="admin-tab" onclick="switchTab('packages-form-admin-benjo')">Packages</button>
                 </div>
             </div>
-
             <!-- Destinations Content -->
-            <div class="admin-content active" id="destinations">
+            <div class="smth-content active" id="destinations-form-admin-benjo">
                 <div class="form-section">
                     <h2 class="form-title">Add New Destination</h2>
                     <div class="success-alert" id="destination-success">
@@ -59,10 +58,9 @@
                         <button type="submit" class="btn-primary">Add Destination</button>
                     </form>
                 </div>
-
                 <!-- Current Destinations -->
                 <div class="items-section">
-                    <h2 class="section-subtitle">Current Destinations</h2>
+                    <h2 class="admin-section-subtitle">Current Destinations</h2>
                     <div class="items-grid" id="destinations-list">
                         <!-- Destinations will be dynamically added here -->
                     </div>
@@ -70,7 +68,7 @@
             </div>
 
             <!-- Packages Content -->
-            <div class="admin-content " id="packages">
+            <div class="smth-content " id="packages-form-admin-benjo">
                 <div class="form-section">
                     <h2 class="form-title">Add New Package</h2>
                     <div class="success-alert" id="package-success">
@@ -106,10 +104,6 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Icon Emoji</label>
-                                <input type="text" class="form-input" id="pkg-icon" placeholder="🏔️" required>
-                            </div>
-                            <div class="form-group">
                                 <label class="form-label">Price</label>
                                 <input type="number" class="form-input" id="pkg-price" placeholder="1299" required>
                             </div>
@@ -124,7 +118,7 @@
 
                 <!-- Current Packages -->
                 <div class="items-section">
-                    <h2 class="section-subtitle">Current Packages</h2>
+                    <h2 class="admin-section-subtitle">Current Packages</h2>
                     <div class="items-grid" id="packages-list">
                         <!-- Packages will be dynamically added here -->
                     </div>

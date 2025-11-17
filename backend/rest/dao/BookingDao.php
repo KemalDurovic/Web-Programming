@@ -14,6 +14,11 @@ class BookingDao extends BaseDao {
        $stmt->execute();
        return $stmt->fetchAll();
    }
+   public function getByUserId($user_id) {
+        $stmt = $this->connection->prepare("SELECT * FROM bookings WHERE user_id = :user_id ORDER BY created_at DESC");
+        $stmt->execute(['user_id' => $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 ?>

@@ -14,5 +14,11 @@ class DestinationDao extends BaseDao {
        $stmt->execute();
        return $stmt->fetch();
    }
+   public function getByBadge($badge) {
+    $stmt = $this->connection->prepare("SELECT * FROM destinations WHERE badge = :badge");
+    $stmt->bindParam(':badge', $badge);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 }
 ?>
