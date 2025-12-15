@@ -24,6 +24,13 @@ class ReviewService extends BaseService {
             throw new Exception('Comment must not exceed 1000 characters.');
         }
         
+        if (empty($data['package_id'])) {
+            unset($data['package_id']);
+        }
+        if (empty($data['destination_id'])) {
+            unset($data['destination_id']);
+        }
+        
         return $this->dao->insert($data);
     }
     
@@ -55,6 +62,13 @@ class ReviewService extends BaseService {
         }
         if (isset($data['comment']) && strlen($data['comment']) > 1000) {
             throw new Exception('Comment must not exceed 1000 characters.');
+        }
+        
+        if (empty($data['package_id'])) {
+            unset($data['package_id']);
+        }
+        if (empty($data['destination_id'])) {
+            unset($data['destination_id']);
         }
         
         return $this->dao->update($id, $data);

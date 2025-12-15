@@ -1,23 +1,19 @@
- <div class="admin-wrapper">
+    <div class="admin-wrapper">
         <div class="admin-container">
-            <!-- Header -->
             <div class="admin-header">
                 <div class="header-gradient">
                     <h1>TravelTrust Admin Panel</h1>
                     <p>Manage destinations and travel packages</p>
                 </div>
-                
-                <!-- Tabs -->
                 <div class="admin-tabs">
-                    <button class="admin-tab active" onclick="switchTab('destinations-form-admin-benjo')">Destinations</button>
-                    <button class="admin-tab" onclick="switchTab('packages-form-admin-benjo')">Packages</button>
+                    <button class="admin-tab active" onclick="switchTab('admin-destinations')">Destinations</button>
+                    <button class="admin-tab" onclick="switchTab('admin-packages')">Packages</button>
                 </div>
             </div>
-            <!-- Destinations Content -->
-            <div class="smth-content active" id="destinations-form-admin-benjo">
+            <div class="smth-content active" id="admin-destinations">
                 <div class="form-section">
                     <h2 class="form-title">Add New Destination</h2>
-                    <div class="success-alert" id="destination-success">
+                    <div class="success-alert" id="destination-success" style="display: none;">
                         Destination added successfully!
                     </div>
                     <form id="destination-form">
@@ -34,12 +30,12 @@
                                 <label class="form-label">Category Badge</label>
                                 <select class="form-select" id="dest-category" required>
                                     <option value="">Select Category</option>
-                                    <option value="Popular">Popular</option>
-                                    <option value="Trending">Trending</option>
-                                    <option value="Cultural">Cultural</option>
-                                    <option value="Adventure">Adventure</option>
-                                    <option value="Winter">Winter</option>
-                                    <option value="Safari">Safari</option>
+                                    <option value="popular">Popular</option>
+                                    <option value="trending">Trending</option>
+                                    <option value="cultural">Cultural</option>
+                                    <option value="adventure">Adventure</option>
+                                    <option value="winter">Winter</option>
+                                    <option value="safari">Safari</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -58,20 +54,13 @@
                         <button type="submit" class="btn-primary">Add Destination</button>
                     </form>
                 </div>
-                <!-- Current Destinations -->
-                <div class="items-section">
-                    <h2 class="admin-section-subtitle">Current Destinations</h2>
-                    <div class="items-grid" id="destinations-list">
-                        <!-- Destinations will be dynamically added here -->
-                    </div>
-                </div>
             </div>
 
             <!-- Packages Content -->
-            <div class="smth-content " id="packages-form-admin-benjo">
+            <div class="smth-content" id="admin-packages">
                 <div class="form-section">
                     <h2 class="form-title">Add New Package</h2>
-                    <div class="success-alert" id="package-success">
+                    <div class="success-alert" id="package-success" style="display: none;">
                         Package added successfully!
                     </div>
                     <form id="package-form">
@@ -95,6 +84,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label class="form-label">Destination</label>
+                                <select class="form-select" id="pkg-destination" required>
+                                    <option value="">Select Destination</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label">Ribbon Badge</label>
                                 <select class="form-select" id="pkg-ribbon">
                                     <option value="">None</option>
@@ -114,14 +109,6 @@
                         </div>
                         <button type="submit" class="btn-primary">Add Package</button>
                     </form>
-                </div>
-
-                <!-- Current Packages -->
-                <div class="items-section">
-                    <h2 class="admin-section-subtitle">Current Packages</h2>
-                    <div class="items-grid" id="packages-list">
-                        <!-- Packages will be dynamically added here -->
-                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-   <section id="packages" class="section packages">
+<section id="packages" class="section packages">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Travel Packages</h2>
@@ -30,7 +30,7 @@
                         <span class="price-amount">$1,299</span>
                         <span class="price-label">per person</span>
                     </div>
-                    <button class="btn-primary full-width">Book Now</button>
+                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(1, 'Alpine Explorer', 1299)">Book Now</button>
                 </div>
 
                 <div class="package-card" data-category="beach">
@@ -48,7 +48,7 @@
                         <span class="price-amount">$2,199</span>
                         <span class="price-label">per person</span>
                     </div>
-                    <button class="btn-primary full-width">Book Now</button>
+                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(2, 'Tropical Paradise', 2199)">Book Now</button>
                 </div>
 
                 <div class="package-card" data-category="cultural">
@@ -65,7 +65,7 @@
                         <span class="price-amount">$1,799</span>
                         <span class="price-label">per person</span>
                     </div>
-                    <button class="btn-primary full-width">Book Now</button>
+                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(3, 'Ancient Wonders', 1799)">Book Now</button>
                 </div>
 
                 <div class="package-card" data-category="luxury">
@@ -83,8 +83,9 @@
                         <span class="price-amount">$8,999</span>
                         <span class="price-label">per person</span>
                     </div>
-                    <button class="btn-primary full-width">Book Now</button>
+                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(4, 'Royal Experience', 8999)">Book Now</button>
                 </div>
+
                 <div class="package-card" data-category="religious">
                     <div class="package-ribbon">Unique</div>
                     <div class="package-icon">🕌</div>
@@ -100,11 +101,12 @@
                         <span class="price-amount">$1,599</span>
                         <span class="price-label">per person</span>
                     </div>
-                    <button class="btn-primary full-width">Book Now</button>
+                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(5, 'Sacred Journey', 1599)">Book Now</button>
                 </div>
+
                 <div class="package-card" data-category="adventure">
                     <div class="package-ribbon">Adrenaline</div>
-                     <div class="package-icon">🪂</div>
+                    <div class="package-icon">🪂</div>
                     <h3>Extreme Rush</h3>
                     <p class="package-duration">6 Days / 5 Nights</p>
                     <ul class="package-features">
@@ -116,9 +118,56 @@
                     <div class="package-price">
                         <span class="price-amount">$2,799</span>
                         <span class="price-label">per person</span>
-                </div>
-                <button class="btn-primary full-width">Book Now</button>
+                    </div>
+                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(6, 'Extreme Rush', 2799)">Book Now</button>
                 </div>
             </div>
         </div>
+
+<div id="bookingModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Book Your Package</h2>
+        
+        <div class="booking-package-info">
+            <h3 id="package_name_display"></h3>
+            <p>Base Price: <span id="package_price_display"></span> per person</p>
+        </div>
+        
+        <form id="bookingForm">
+            <input type="hidden" id="booking_id">
+            <input type="hidden" id="booking_package_id">
+            <input type="hidden" id="booking_total_price">
+            
+            <div class="form-group">
+                <label for="booking_date">Travel Date</label>
+                <input type="date" id="booking_date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="number_of_people">Number of People</label>
+                <input type="number" id="number_of_people" min="1" value="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="special_requests">Special Requests (Optional)</label>
+                <textarea id="special_requests" rows="3" placeholder="Any special requirements or requests..."></textarea>
+            </div>
+            
+            <div class="booking-total">
+                <h3>Total Price: <span id="total_price_display">$0.00</span></h3>
+            </div>
+            
+            <button type="button" id="submitBooking" class="btn-primary full-width">Confirm Booking</button>
+        </form>
+    </div>
+</div> 
     </section>
+
+<script>
+$(document).ready(function() {
+    if (typeof BookingService !== 'undefined') {
+        BookingService.init();
+    }
+});
+</script>

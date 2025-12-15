@@ -72,7 +72,18 @@ Flight::route('GET /reviews/@id', function($id){
 */
 Flight::route('POST /reviews', function(){
    $data = Flight::request()->data->getData();
-   Flight::json(Flight::reviewService()->create($data));
+   
+   // Clean up data - only keep allowed review fields
+   $cleanData = [];
+   $allowedFields = ['user_id', 'destination_id', 'package_id', 'rating', 'title', 'comment', 'is_verified'];
+   
+   foreach ($data as $key => $value) {
+       if (in_array($key, $allowedFields)) {
+           $cleanData[$key] = $value;
+       }
+   }
+   
+   Flight::json(Flight::reviewService()->create($cleanData));
 });
 
 /**
@@ -105,7 +116,18 @@ Flight::route('POST /reviews', function(){
 */
 Flight::route('PUT /reviews/@id', function($id){
    $data = Flight::request()->data->getData();
-   Flight::json(Flight::reviewService()->update($id, $data));
+   
+   // Clean up data for updates too
+   $cleanData = [];
+   $allowedFields = ['user_id', 'destination_id', 'package_id', 'rating', 'title', 'comment', 'is_verified'];
+   
+   foreach ($data as $key => $value) {
+       if (in_array($key, $allowedFields)) {
+           $cleanData[$key] = $value;
+       }
+   }
+   
+   Flight::json(Flight::reviewService()->update($id, $cleanData));
 });
 
 /**
@@ -135,7 +157,18 @@ Flight::route('PUT /reviews/@id', function($id){
 */
 Flight::route('PATCH /reviews/@id', function($id){
    $data = Flight::request()->data->getData();
-   Flight::json(Flight::reviewService()->update($id, $data));
+   
+   // Clean up data for patches too
+   $cleanData = [];
+   $allowedFields = ['user_id', 'destination_id', 'package_id', 'rating', 'title', 'comment', 'is_verified'];
+   
+   foreach ($data as $key => $value) {
+       if (in_array($key, $allowedFields)) {
+           $cleanData[$key] = $value;
+       }
+   }
+   
+   Flight::json(Flight::reviewService()->update($id, $cleanData));
 });
 
 /**

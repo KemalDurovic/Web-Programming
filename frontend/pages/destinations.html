@@ -1,4 +1,4 @@
-    <section id="destinations" class="section destinations">
+<section id="destinations" class="section destinations">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Popular Destinations</h2>
@@ -17,14 +17,14 @@
                         <p class="destination-description">Majestic mountains, pristine lakes, and charming villages await you.</p>
                         <div class="destination-footer">
                             <span class="destination-price">From $1,299</span>
-                            <button class="btn-secondary">Explore</button>
+                            <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(1)">Explore</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="destination-card">
                     <div class="destination-image">
-                        <img src="https://afar.brightspotcdn.com/dims4/default/ea28eda/2147483647/strip/false/crop/3000x1688+0+275/resize/1200x675!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2Fb2%2Ff4%2F9a1ebe3f427f8e5eb937f8df8998%2Ftravelguides-maldives-videomediastudioeurope-shutterstock.jpg"" alt="Maldives">
+                        <img src="https://afar.brightspotcdn.com/dims4/default/ea28eda/2147483647/strip/false/crop/3000x1688+0+275/resize/1200x675!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2Fb2%2Ff4%2F9a1ebe3f427f8e5eb937f8df8998%2Ftravelguides-maldives-videomediastudioeurope-shutterstock.jpg" alt="Maldives">
                         <div class="destination-badge">Trending</div>
                     </div>
                     <div class="destination-content">
@@ -33,7 +33,7 @@
                         <p class="destination-description">Crystal clear waters and luxury overwater villas in paradise.</p>
                         <div class="destination-footer">
                             <span class="destination-price">From $2,199</span>
-                            <button class="btn-secondary">Explore</button>
+                            <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(2)">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <p class="destination-description">Explore ancient pyramids and sail down the legendary Nile.</p>
                         <div class="destination-footer">
                             <span class="destination-price">From $1,799</span>
-                            <button class="btn-secondary">Explore</button>
+                            <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(3)">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                         <p class="destination-description">Trek through jungle and discover exotic wildlife.</p>
                         <div class="destination-footer">
                             <span class="destination-price">From $1,599</span>
-                            <button class="btn-secondary">Explore</button>
+                            <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(4)">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         <p class="destination-description">Witness the magical aurora borealis in arctic skies.</p>
                         <div class="destination-footer">
                             <span class="destination-price">From $1,899</span>
-                            <button class="btn-secondary">Explore</button>
+                            <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(5)">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -97,10 +97,78 @@
                         <p class="destination-description">Experience wildlife and spot the Big Five in savanna.</p>
                         <div class="destination-footer">
                             <span class="destination-price">From $2,499</span>
-                            <button class="btn-secondary">Explore</button>
+                            <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(6)">Explore</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+<!-- Destination Details Modal -->
+<div id="destinationModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content modal-large">
+        <span class="close-modal" onclick="$('#destinationModal').fadeOut();" style="position: absolute; top: 15px; right: 15px; font-size: 28px; font-weight: bold; color: white; cursor: pointer; z-index: 1000; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">&times;</span>
+        
+        <div class="destination-modal-header">
+            <img id="modal_destination_image" src="" alt="Destination">
+            <div class="destination-modal-title">
+                <h2 id="modal_destination_name"></h2>
+                <p id="modal_destination_location"></p>
+            </div>
+        </div>
+        
+        <div class="destination-modal-body">
+            <div class="destination-details">
+                <h3>About This Destination</h3>
+                <p id="modal_destination_description"></p>
+                
+                <div class="destination-highlights">
+                    <h4>Highlights</h4>
+                    <ul id="modal_destination_highlights"></ul>
+                </div>
+                
+                <div class="destination-info-grid">
+                    <div class="info-item">
+                        <span class="info-icon">🌡️</span>
+                        <div>
+                            <strong>Best Time to Visit</strong>
+                            <p id="modal_best_time"></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">✈️</span>
+                        <div>
+                            <strong>Flight Duration</strong>
+                            <p id="modal_flight_duration"></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">💬</span>
+                        <div>
+                            <strong>Language</strong>
+                            <p id="modal_language"></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">💰</span>
+                        <div>
+                            <strong>Currency</strong>
+                            <p id="modal_currency"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    if (typeof DestinationService !== 'undefined') {
+        DestinationService.init();
+        console.log('Destinations page ready');
+    }
+});
+</script>
     </section>
