@@ -2,8 +2,9 @@
 class Database {
    private static $host = 'localhost';
    private static $dbName = 'travel_booking';
-   private static $username = 'travel_admin';
-   private static $password = 'Travel123!';
+   private static $username = 'root';
+   private static $password = '';
+   private static $port = '3307';
    private static $connection = null;
 
 
@@ -11,7 +12,7 @@ class Database {
        if (self::$connection === null) {
            try {
                self::$connection = new PDO(
-                   "mysql:host=" . self::$host . ";dbname=" . self::$dbName,
+                   "mysql:host=" . self::$host . ";port=" . self::$port .  ";dbname=" . self::$dbName,
                    self::$username,
                    self::$password,
                    [
@@ -25,5 +26,9 @@ class Database {
        }
        return self::$connection;
    }
+    // JWT Secret Key Definition
+    public static function JWT_SECRET() {
+        return 'kemal_string';
+    }
 }
 ?>

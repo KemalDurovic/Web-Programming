@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelTrust - Explore the World</title>
     <link rel="stylesheet" href="assets/css/TravelTrust.css">
-        <!-- Spapp CSS-->
-        <link href="../frontend/assets/css/spapp.css" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link href="assets/css/spapp.css" rel="stylesheet" media="screen"/>
 </head>
 <body>
 
@@ -104,25 +104,50 @@
             </div>
         </div>
     </footer>
-    <script src="assets/js/TravelTrust.js"></script>
-        <!-- JQuery-->
-        <script src="../frontend/assets/js/jquery-3.7.1.min.js"></script>
-        <!-- JQuery Spapp-->
-        <script src="../frontend/assets/js/jquery.spapp.min.js"></script>
-        <!-- Utils-->
-    <script src="../frontend/utils/utils.js"></script>
-        <script>
-            Utils.init_spapp();
-        </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="utils/constant.js"></script>
+<script src="utils/Utils.js"></script>
+<script src="utils/rest-client.js"></script>
+<script src="services/user-service.js"></script>
+<script src="services/destination-service.js"></script>
+<script src="services/booking-service.js"></script>
+<script src="services/package-service.js"></script>
+<script src="services/review-service.js"></script>
+<script src="assets/js/jquery.spapp.js"></script>
+<script src="assets/js/TravelTrust.js"></script>
+<script>
+  $(document).ready(function() {
+    Utils.init_spapp();
+    UserService.updateNavigation();
+  });
+</script>
         <script>
                 function switchTab(content_id) {
-    // Sakrij sve content sekcije
-    document.querySelectorAll('.smth-content').forEach(content => {
+    console.log('switchTab called with:', content_id);
+    
+    document.querySelectorAll('.smth-content').forEach(function(content) {
         content.classList.remove('active');
     });
     
-    // Prikaži odabranu sekciju
-    document.getElementById(content_id).classList.add('active')
+    const selectedContent = document.getElementById(content_id);
+    if (selectedContent) {
+        selectedContent.classList.add('active');
+    }
+    
+    document.querySelectorAll('.admin-tab').forEach(function(tab) {
+        tab.classList.remove('active');
+    });
+    
+    event.currentTarget.classList.add('active');
+    
+    if (content_id === 'admin-packages' && typeof PackageService !== 'undefined') {
+        setTimeout(function() {
+            PackageService.loadDestinationsDropdown();
+        }, 100);
+    }
 }
         </script>
 </body>
