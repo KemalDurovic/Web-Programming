@@ -86,7 +86,6 @@ var BookingService = {
         // Store package info
         $('#booking_package_id').val(packageId);
         $('#package_name_display').text(packageName);
-        $('#package_price_display').text('$' + packagePrice.toLocaleString());
         $('#booking_id').val('');
         $('#booking_date').val('');
         $('#number_of_people').val('1');

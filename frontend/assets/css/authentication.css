@@ -256,6 +256,7 @@ body {
 
 #forgot-password-form {
     padding: 30px;
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
 }
 
 #forgot-password-form .form-group {

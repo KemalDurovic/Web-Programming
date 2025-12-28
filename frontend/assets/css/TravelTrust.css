@@ -1002,6 +1002,14 @@
     gap: 30px;
 }
 
+.destination-modal-body img {
+  transition: transform 0.3s ease;
+}
+
+.destination-modal-body img:hover {
+  transform: scale(1.1); 
+}
+
 .destination-details h3,
 .destination-packages h3 {
     color: #ff6b6b;
@@ -1121,4 +1129,24 @@
     .destination-info-grid {
         grid-template-columns: 1fr;
     }
+}
+.btn-primary,
+.book-button,
+button.btn-primary {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    border: none;
+    color: white;
+    padding: 15px;
+}
+
+.modal-content .btn-primary {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    border: none;
+    color: white;
+}
+
+.modal-content .btn-primary:hover {
+    background: linear-gradient(135deg, #4ECDC4, #FF6B6B);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }

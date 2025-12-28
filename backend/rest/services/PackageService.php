@@ -20,19 +20,12 @@ class PackageService extends BaseService {
         if (empty($data['duration_days'])) {
             throw new Exception('Duration in days is required.');
         }
-        if (empty($data['price'])) {
-            throw new Exception('Price is required.');
-        }
         if (strlen($data['name']) < 3 || strlen($data['name']) > 150) {
             throw new Exception('Package name must be between 3 and 150 characters.');
         }
         if (!is_numeric($data['duration_days']) || $data['duration_days'] <= 0) {
             throw new Exception('Duration days must be a positive number.');
         }
-        if (!is_numeric($data['price']) || $data['price'] <= 0) {
-            throw new Exception('Price must be a positive number.');
-        }
-        
         return $this->dao->insert($data);
     }
     
@@ -68,12 +61,6 @@ class PackageService extends BaseService {
                 throw new Exception('Duration days must be a positive number.');
             }
         }
-        if (isset($data['price'])) {
-            if (!is_numeric($data['price']) || $data['price'] <= 0) {
-                throw new Exception('Price must be a positive number.');
-            }
-        }
-        
         return $this->dao->update($id, $data);
     }
 }
