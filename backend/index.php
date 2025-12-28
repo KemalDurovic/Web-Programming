@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-require_once __DIR__ . '/rest/config/config.php';
+require_once __DIR__ . '/rest/config.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
