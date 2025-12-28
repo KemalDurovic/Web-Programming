@@ -1,14 +1,26 @@
 RewriteEngine On
 
-# For production (DigitalOcean)
+# Set base for production
 RewriteBase /backend/
+
+# Handle CORS preflight OPTIONS requests
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
 
 # Allow if file exists
 RewriteCond %{REQUEST_FILENAME} !-f
-# Allow if directory exists
+# Allow if directory exists  
 RewriteCond %{REQUEST_FILENAME} !-d
-# Route everything to index.php
+# Route everything else to index.php
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+# CORS Headers
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, Authentication"
+    Header set Access-Control-Max-Age "3600"
+</IfModule>
 
 # Allow all HTTP methods
 <Limit GET POST PUT DELETE PATCH OPTIONS>
