@@ -1,6 +1,7 @@
 <?php
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+
 Flight::group('/auth', function() {
    /**
     * @OA\Post(
@@ -46,7 +47,6 @@ Flight::group('/auth', function() {
    Flight::route("POST /register", function () {
        $data = Flight::request()->data->getData();
 
-
        $response = Flight::auth_service()->register($data);
   
        if ($response['success']) {
@@ -58,6 +58,7 @@ Flight::group('/auth', function() {
            Flight::halt(500, $response['error']);
        }
    });
+
    /**
     * @OA\Post(
     *      path="/auth/login",
@@ -65,21 +66,20 @@ Flight::group('/auth', function() {
     *      summary="Login to system using email and password",
     *      @OA\Response(
     *           response=200,
-    *           description="Student data and JWT"
+    *           description="User data and JWT"
     *      ),
     *      @OA\RequestBody(
     *          description="Credentials",
     *          @OA\JsonContent(
     *              required={"email","password"},
-    *              @OA\Property(property="email", type="string", example="demo@gmail.com", description="Student email address"),
-    *              @OA\Property(property="password", type="string", example="some_password", description="Student password")
+    *              @OA\Property(property="email", type="string", example="demo@gmail.com", description="User email address"),
+    *              @OA\Property(property="password", type="string", example="some_password", description="User password")
     *          )
     *      )
     * )
     */
    Flight::route('POST /login', function() {
        $data = Flight::request()->data->getData();
-
 
        $response = Flight::auth_service()->login($data);
   
