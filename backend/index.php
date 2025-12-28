@@ -1,6 +1,19 @@
 <?php
 require 'vendor/autoload.php';
 
+// CORS headers - add this IMMEDIATELY
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, Authentication');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+// Log all requests for debugging
+error_log("REQUEST: " . $_SERVER['REQUEST_METHOD'] . " " . $_SERVER['REQUEST_URI']);
+
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
