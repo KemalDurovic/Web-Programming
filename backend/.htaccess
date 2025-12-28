@@ -1,5 +1,16 @@
 RewriteEngine On
-RewriteBase /kemal_durovic/web-programming/backend/
+
+# For production (DigitalOcean)
+RewriteBase /backend/
+
+# Allow if file exists
 RewriteCond %{REQUEST_FILENAME} !-f
+# Allow if directory exists
 RewriteCond %{REQUEST_FILENAME} !-d
+# Route everything to index.php
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Allow all HTTP methods
+<Limit GET POST PUT DELETE PATCH OPTIONS>
+    Require all granted
+</Limit>
