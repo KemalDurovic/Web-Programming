@@ -53,7 +53,21 @@ class Database {
    }
 
    private static function get_env($name, $default) {
-       return isset($_ENV[$name]) && trim($_ENV[$name]) != "" ? $_ENV[$name] : $default;
+       // Try getenv() first (DigitalOcean), then $_ENV, then $_SERVER
+       $value = getenv($name);
+       if ($value !== false && trim($value) != "") {
+           return $value;
+       }
+       
+       if (isset($_ENV[$name]) && trim($_ENV[$name]) != "") {
+           return $_ENV[$name];
+       }
+       
+       if (isset($_SERVER[$name]) && trim($_SERVER[$name]) != "") {
+           return $_SERVER[$name];
+       }
+       
+       return $default;
    }
 }
 ?>
