@@ -25,7 +25,7 @@ var UserService = {
       console.log("Register data:", entity);
       
       if (entity.password !== entity.password_confirm) {
-        alert("Passwords do not match!");
+        toastr.error("Passwords do not match!");
         return;
       }
       
@@ -48,10 +48,26 @@ var UserService = {
         
         if (result.data && result.data.token) {
           localStorage.setItem("user_token", result.data.token);
-          alert("Welcome back! Logging in as " + entity.email);
+          
+          // Decode JWT and store user info
+          const decoded = Utils.parseJwt(result.data.token);
+          console.log("Decoded JWT:", decoded);
+
+          if (decoded && decoded.user) {
+            const userInfo = {
+              id: decoded.user.user_id || decoded.user.id,
+              role: decoded.user.role,
+              email: decoded.user.email,
+              full_name: decoded.user.full_name,
+              username: decoded.user.username
+            };
+            localStorage.setItem("user_info", JSON.stringify(userInfo));
+          }
+          
+          toastr.success("Welcome back! Login successful.");
           window.location.href = "index.html";
         } else {
-          alert("Login failed: No token received");
+          toastr.error("Login failed: No token received");
         }
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -59,14 +75,16 @@ var UserService = {
         var errorMsg = 'Login failed';
         
         if (XMLHttpRequest.responseJSON && XMLHttpRequest.responseJSON.message) {
-          errorMsg += ': ' + XMLHttpRequest.responseJSON.message;
+          errorMsg = XMLHttpRequest.responseJSON.message;
+        } else if (XMLHttpRequest.responseJSON && XMLHttpRequest.responseJSON.error) {
+          errorMsg = XMLHttpRequest.responseJSON.error;
         } else if (XMLHttpRequest.responseText) {
-          errorMsg += ': ' + XMLHttpRequest.responseText;
+          errorMsg = XMLHttpRequest.responseText;
         } else {
-          errorMsg += ': Unable to connect to server';
+          errorMsg = 'Unable to connect to server';
         }
         
-        alert(errorMsg);
+        toastr.error(errorMsg);
       },
     });
   },
@@ -74,6 +92,7 @@ var UserService = {
   register: function (entity) {
     console.log("Sending register request to:", Constants.PROJECT_BASE_URL + "auth/register");
     
+    // Remove password_confirm before sending to server
     delete entity.password_confirm;
     
     $.ajax({
@@ -84,8 +103,9 @@ var UserService = {
       dataType: "json",
       success: function (result) {
         console.log("Registration successful:", result);
-        alert('Registration successful! Please login.');
+        toastr.success('Registration successful! Please login.');
         
+        // Switch to login tab
         $('.tab-btn[data-tab="login"]').click();
         $('#register-form')[0].reset();
       },
@@ -94,27 +114,30 @@ var UserService = {
         var errorMsg = 'Registration failed';
         
         if (XMLHttpRequest.responseJSON && XMLHttpRequest.responseJSON.message) {
-          errorMsg += ': ' + XMLHttpRequest.responseJSON.message;
+          errorMsg = XMLHttpRequest.responseJSON.message;
+        } else if (XMLHttpRequest.responseJSON && XMLHttpRequest.responseJSON.error) {
+          errorMsg = XMLHttpRequest.responseJSON.error;
         } else if (XMLHttpRequest.responseText) {
-          errorMsg += ': ' + XMLHttpRequest.responseText;
+          errorMsg = XMLHttpRequest.responseText;
         } else {
-          errorMsg += ': Unable to connect to server';
+          errorMsg = 'Unable to connect to server';
         }
         
-        alert(errorMsg);
+        toastr.error(errorMsg);
       },
     });
   },
 
   logout: function () {
-    localStorage.clear();
+    localStorage.removeItem("user_token");
+    localStorage.removeItem("user_info");
+    toastr.info("You have been logged out.");
     window.location.href = "login.html";
   },
 
   updateNavigation: function() {
     const token = localStorage.getItem("user_token");
     if (!token) {
-      window.location.href = "login.html";
       return;
     }
 
@@ -127,6 +150,7 @@ var UserService = {
 
     const user = decoded.user;
     
+    // Build navigation based on role
     let navHtml = `
       <li><a href="#home">Home</a></li>
       <li><a href="#destinations">Destinations</a></li>
@@ -135,14 +159,54 @@ var UserService = {
       <li><a href="#contact">Contact</a></li>
     `;
 
+    // Add admin link only for admin role
     if (user.role === Constants.ADMIN_ROLE) {
       navHtml += `<li><a href="#admin">Admin</a></li>`;
     }
 
     $("#navMenu").html(navHtml);
     
+    // Update auth buttons
     $(".auth-buttons").html(`
-      <button class="btn-login" onclick="UserService.logout()">Logout</button>
+      <span style="margin-right: 15px; color: white;">Welcome, ${user.full_name || user.username || user.email}</span>
+      <button class="btn-logout" onclick="UserService.logout()">Logout</button>
     `);
+  },
+
+  isLoggedIn: function() {
+    const token = localStorage.getItem("user_token");
+    if (!token) return false;
+    
+    const decoded = Utils.parseJwt(token);
+    if (!decoded || !decoded.exp) return false;
+    
+    // Check if token is expired
+    if (decoded.exp < Date.now() / 1000) {
+      localStorage.clear();
+      return false;
+    }
+    
+    return true;
+  },
+
+  getCurrentUser: function() {
+    const userInfo = localStorage.getItem("user_info");
+    if (!userInfo) return null;
+    
+    try {
+      return JSON.parse(userInfo);
+    } catch (e) {
+      console.error("Error parsing user info:", e);
+      return null;
+    }
+  },
+
+  getUserRole: function() {
+    const user = this.getCurrentUser();
+    return user ? user.role : null;
+  },
+
+  isAdmin: function() {
+    return this.getUserRole() === Constants.ADMIN_ROLE;
   }
 };

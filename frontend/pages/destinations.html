@@ -16,7 +16,7 @@
                         <p class="destination-location">📍 Switzerland</p>
                         <p class="destination-description">Majestic mountains, pristine lakes, and charming villages await you.</p>
                         <div class="destination-footer">
-                            <span class="destination-price">From $1,299</span>
+                            <span class="destination-price">From €1,299</span>
                             <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(1)">Explore</button>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                         <p class="destination-location">📍 Indian Ocean</p>
                         <p class="destination-description">Crystal clear waters and luxury overwater villas in paradise.</p>
                         <div class="destination-footer">
-                            <span class="destination-price">From $2,199</span>
+                            <span class="destination-price">From €2,199</span>
                             <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(2)">Explore</button>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <p class="destination-location">📍 Egypt</p>
                         <p class="destination-description">Explore ancient pyramids and sail down the legendary Nile.</p>
                         <div class="destination-footer">
-                            <span class="destination-price">From $1,799</span>
+                            <span class="destination-price">From €1,799</span>
                             <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(3)">Explore</button>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <p class="destination-location">📍 Brazil</p>
                         <p class="destination-description">Trek through jungle and discover exotic wildlife.</p>
                         <div class="destination-footer">
-                            <span class="destination-price">From $1,599</span>
+                            <span class="destination-price">From €1,599</span>
                             <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(4)">Explore</button>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <p class="destination-location">📍 Norway</p>
                         <p class="destination-description">Witness the magical aurora borealis in arctic skies.</p>
                         <div class="destination-footer">
-                            <span class="destination-price">From $1,899</span>
+                            <span class="destination-price">From €1,899</span>
                             <button class="btn-secondary" onclick="event.preventDefault(); event.stopPropagation(); DestinationService.showDestinationModal(5)">Explore</button>
                         </div>
                     </div>
@@ -126,39 +126,10 @@
                     <h4>Highlights</h4>
                     <ul id="modal_destination_highlights"></ul>
                 </div>
-                
                 <div class="destination-info-grid">
-                    <div class="info-item">
-                        <span class="info-icon">🌡️</span>
-                        <div>
-                            <strong>Best Time to Visit</strong>
-                            <p id="modal_best_time"></p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">✈️</span>
-                        <div>
-                            <strong>Flight Duration</strong>
-                            <p id="modal_flight_duration"></p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">💬</span>
-                        <div>
-                            <strong>Language</strong>
-                            <p id="modal_language"></p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">💰</span>
-                        <div>
-                            <strong>Currency</strong>
-                            <p id="modal_currency"></p>
-                        </div>
-                    </div>
+                    <div id="modal_packages_list"></div>
                 </div>
-            </div>
-            
+            </div> 
         </div>
     </div>
 </div>

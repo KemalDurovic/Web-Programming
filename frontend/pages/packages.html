@@ -1,171 +1,58 @@
 <section id="packages" class="section packages">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Travel Packages</h2>
-                <p class="section-subtitle">Carefully curated packages designed for unforgettable experiences.</p>
-            </div>
-            
-            <div class="packages-tabs">
-                <button class="package-tab active" data-category="all">All Packages</button>
-                <button class="package-tab" data-category="adventure">Adventure</button>
-                <button class="package-tab" data-category="beach">Beach</button>
-                <button class="package-tab" data-category="cultural">Cultural</button>
-                <button class="package-tab" data-category="luxury">Luxury</button>
-                <button class="package-tab" data-category="religious">Religious</button>
-            </div>
-
-            <div class="packages-grid">
-                <div class="package-card" data-category="adventure">
-                    <div class="package-ribbon">Best Seller</div>
-                    <div class="package-icon">🏔️</div>
-                    <h3>Alpine Explorer</h3>
-                    <p class="package-duration">7 Days / 6 Nights</p>
-                    <ul class="package-features">
-                        <li>✓ Mountain hiking tours</li>
-                        <li>✓ Cable car experiences</li>
-                        <li>✓ Local cuisine tasting</li>
-                        <li>✓ Professional guide</li>
-                    </ul>
-                    <div class="package-price">
-                        <span class="price-amount">$1,299</span>
-                        <span class="price-label">per person</span>
-                    </div>
-                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(1, 'Alpine Explorer', 1299)">Book Now</button>
-                </div>
-
-                <div class="package-card" data-category="beach">
-                    <div class="package-ribbon">Premium</div>
-                    <div class="package-icon">🏖️</div>
-                    <h3>Tropical Paradise</h3>
-                    <p class="package-duration">5 Days / 4 Nights</p>
-                    <ul class="package-features">
-                        <li>✓ Luxury resort stay</li>
-                        <li>✓ Water sports included</li>
-                        <li>✓ Private beach access</li>
-                        <li>✓ Spa treatments</li>
-                    </ul>
-                    <div class="package-price">
-                        <span class="price-amount">$2,199</span>
-                        <span class="price-label">per person</span>
-                    </div>
-                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(2, 'Tropical Paradise', 2199)">Book Now</button>
-                </div>
-
-                <div class="package-card" data-category="cultural">
-                    <div class="package-icon">🏛️</div>
-                    <h3>Ancient Wonders</h3>
-                    <p class="package-duration">10 Days / 9 Nights</p>
-                    <ul class="package-features">
-                        <li>✓ Pyramid tours</li>
-                        <li>✓ Nile River cruise</li>
-                        <li>✓ Museum visits</li>
-                        <li>✓ Expert Egyptologist</li>
-                    </ul>
-                    <div class="package-price">
-                        <span class="price-amount">$1,799</span>
-                        <span class="price-label">per person</span>
-                    </div>
-                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(3, 'Ancient Wonders', 1799)">Book Now</button>
-                </div>
-
-                <div class="package-card" data-category="luxury">
-                    <div class="package-ribbon">Exclusive</div>
-                    <div class="package-icon">✨</div>
-                    <h3>Royal Experience</h3>
-                    <p class="package-duration">14 Days / 13 Nights</p>
-                    <ul class="package-features">
-                        <li>✓ 5-star accommodations</li>
-                        <li>✓ Private transfers</li>
-                        <li>✓ Fine dining</li>
-                        <li>✓ Personal concierge</li>
-                    </ul>
-                    <div class="package-price">
-                        <span class="price-amount">$8,999</span>
-                        <span class="price-label">per person</span>
-                    </div>
-                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(4, 'Royal Experience', 8999)">Book Now</button>
-                </div>
-
-                <div class="package-card" data-category="religious">
-                    <div class="package-ribbon">Unique</div>
-                    <div class="package-icon">🕌</div>
-                    <h3>Sacred Journey</h3>
-                    <p class="package-duration">5 Days / 4 Nights</p>
-                    <ul class="package-features">
-                        <li>✓ Holy site visits</li>
-                        <li>✓ Spiritual guidance</li>
-                        <li>✓ Monastery tours</li>
-                        <li>✓ Traditional ceremonies</li>
-                    </ul>
-                    <div class="package-price">
-                        <span class="price-amount">$1,599</span>
-                        <span class="price-label">per person</span>
-                    </div>
-                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(5, 'Sacred Journey', 1599)">Book Now</button>
-                </div>
-
-                <div class="package-card" data-category="adventure">
-                    <div class="package-ribbon">Adrenaline</div>
-                    <div class="package-icon">🪂</div>
-                    <h3>Extreme Rush</h3>
-                    <p class="package-duration">6 Days / 5 Nights</p>
-                    <ul class="package-features">
-                        <li>✓ Skydiving experience</li>
-                        <li>✓ Bungee jumping</li>
-                        <li>✓ White water rafting</li>
-                        <li>✓ Paragliding sessions</li>
-                    </ul>
-                    <div class="package-price">
-                        <span class="price-amount">$2,799</span>
-                        <span class="price-label">per person</span>
-                    </div>
-                    <button class="btn-primary full-width" onclick="BookingService.showBookingModal(6, 'Extreme Rush', 2799)">Book Now</button>
-                </div>
-            </div>
-        </div>
-
-<div id="bookingModal" class="modal-overlay" style="display: none;">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Book Your Package</h2>
-        
-        <div class="booking-package-info">
-            <h3 id="package_name_display"></h3>
-            <p>Base Price: <span id="package_price_display"></span> per person</p>
+    <div class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">Travel Packages</h2>
+            <p class="section-subtitle">Carefully curated packages designed for unforgettable experiences.</p>
         </div>
         
-        <form id="bookingForm">
-            <input type="hidden" id="booking_id">
-            <input type="hidden" id="booking_package_id">
-            <input type="hidden" id="booking_total_price">
-            
-            <div class="form-group">
-                <label for="booking_date">Travel Date</label>
-                <input type="date" id="booking_date" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="number_of_people">Number of People</label>
-                <input type="number" id="number_of_people" min="1" value="1" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="special_requests">Special Requests (Optional)</label>
-                <textarea id="special_requests" rows="3" placeholder="Any special requirements or requests..."></textarea>
-            </div>
-            
-            <div class="booking-total">
-                <h3>Total Price: <span id="total_price_display">$0.00</span></h3>
-            </div>
-            
-            <button type="button" id="submitBooking" class="btn-primary full-width">Confirm Booking</button>
-        </form>
+        <div class="packages-tabs">
+            <button class="package-tab active" data-category="all">All Packages</button>
+            <button class="package-tab" data-category="adventure">Adventure</button>
+            <button class="package-tab" data-category="beach">Beach</button>
+            <button class="package-tab" data-category="cultural">Cultural</button>
+            <button class="package-tab" data-category="luxury">Luxury</button>
+        </div>
+
+        <div class="packages-grid">
+        </div>
     </div>
-</div> 
-    </section>
+
+    <div id="bookingModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Book Your Package</h2>
+            
+            <form id="bookingForm">
+                <input type="hidden" id="booking_id">
+                <input type="hidden" id="booking_package_id">
+                <input type="hidden" id="booking_total_price">
+                
+                <div class="form-group">
+                    <label for="booking_date">Travel Date</label>
+                    <input type="date" id="booking_date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="number_of_people">Number of People</label>
+                    <input type="number" id="number_of_people" min="1" value="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="special_requests">Special Requests (Optional)</label>
+                    <textarea id="special_requests" rows="3" placeholder="Any special requirements or requests..."></textarea>
+                </div>
+                
+                <button type="button" id="submitBooking" class="btn-primary full-width">Confirm Booking</button>
+            </form>
+        </div>
+    </div> 
+</section>
 
 <script>
 $(document).ready(function() {
+    if (typeof PackageService !== 'undefined') {
+        PackageService.init();
+    }
     if (typeof BookingService !== 'undefined') {
         BookingService.init();
     }

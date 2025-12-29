@@ -1,13 +1,38 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+
+header('Access-Control-Allow-Origin: https://seahorse-app-sc4ki.ondigitalocean.app');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authentication, Authorization');
+header('Access-Control-Allow-Credentials: true');
+
+// Handle preflight OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 require 'vendor/autoload.php';
+require_once __DIR__ . '/rest/config.php';
+
+error_log("========================================");
+error_log("REQUEST: " . $_SERVER['REQUEST_METHOD'] . " " . $_SERVER['REQUEST_URI']);
+error_log("========================================");
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
+// Test database connection
+try {
+    $conn = Database::connect();
+    error_log("Database connection successful!");
+} catch (Exception $e) {
+    error_log("Database connection failed: " . $e->getMessage());
+    die("Database connection failed");
+}
 
 require_once __DIR__ . '/rest/services/DestinationService.php';
 Flight::register('destinationService', 'DestinationService');
@@ -35,21 +60,29 @@ Flight::route('GET /debug/routes', function(){
     Flight::json(Flight::router()->getRoutes());
 });
 
+// Load auth routes BEFORE middleware
 require_once __DIR__ . '/rest/routes/AuthRoutes.php';
 
-Flight::route('/*', function() {
+// Authentication middleware for protected routes
+Flight::before('start', function() {
     $url = Flight::request()->url;
     
-    if(
-        $url === '/' ||
-        $url === '' ||
-        strpos($url, '/auth/login') === 0 ||
-        strpos($url, '/auth/register') === 0 ||
-        strpos($url, '/debug/routes') === 0
-    ) {
-        return TRUE;
+    // Skip authentication for public routes
+    $publicRoutes = ['/', '', '/debug/routes'];
+    
+    // Check if it's an auth route
+    if (strpos($url, '/auth/') !== false) {
+        return true;
     }
     
+    // Check if it's a public route
+    foreach ($publicRoutes as $route) {
+        if ($url === $route) {
+            return true;
+        }
+    }
+    
+    // For all other routes, require authentication
     try {
         $token = Flight::request()->getHeader("Authentication");
         if(!$token) {
@@ -60,7 +93,7 @@ Flight::route('/*', function() {
 
         Flight::set('user', $decoded_token->user);
         Flight::set('jwt_token', $token);
-        return TRUE;
+        return true;
     } catch (\Exception $e) {
         Flight::halt(401, json_encode(['error' => $e->getMessage()]));
     }
