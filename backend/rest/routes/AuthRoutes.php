@@ -45,17 +45,23 @@ Flight::group('/auth', function() {
     * )
     */
    Flight::route("POST /register", function () {
-       $data = Flight::request()->data->getData();
+       try {
+           $data = Flight::request()->data->getData();
+           error_log("Register request data: " . json_encode($data));
 
-       $response = Flight::auth_service()->register($data);
-  
-       if ($response['success']) {
-           Flight::json([
-               'message' => 'User registered successfully',
-               'data' => $response['data']
-           ]);
-       } else {
-           Flight::halt(500, $response['error']);
+           $response = Flight::auth_service()->register($data);
+      
+           if ($response['success']) {
+               Flight::json([
+                   'message' => 'User registered successfully',
+                   'data' => $response['data']
+               ], 200);
+           } else {
+               Flight::json(['error' => $response['error']], 400);
+           }
+       } catch (Exception $e) {
+           error_log("Register route error: " . $e->getMessage());
+           Flight::json(['error' => 'Registration failed: ' . $e->getMessage()], 500);
        }
    });
 
@@ -79,17 +85,24 @@ Flight::group('/auth', function() {
     * )
     */
    Flight::route('POST /login', function() {
-       $data = Flight::request()->data->getData();
+       try {
+           $data = Flight::request()->data->getData();
+           error_log("Login request received for: " . ($data['email'] ?? 'no email'));
 
-       $response = Flight::auth_service()->login($data);
-  
-       if ($response['success']) {
-           Flight::json([
-               'message' => 'User logged in successfully',
-               'data' => $response['data']
-           ]);
-       } else {
-           Flight::halt(500, $response['error']);
+           $response = Flight::auth_service()->login($data);
+      
+           if ($response['success']) {
+               Flight::json([
+                   'message' => 'User logged in successfully',
+                   'data' => $response['data']
+               ], 200);
+           } else {
+               Flight::json(['error' => $response['error']], 400);
+           }
+       } catch (Exception $e) {
+           error_log("Login route error: " . $e->getMessage());
+           error_log("Stack trace: " . $e->getTraceAsString());
+           Flight::json(['error' => 'Login failed: ' . $e->getMessage()], 500);
        }
    });
 
@@ -132,17 +145,22 @@ Flight::group('/auth', function() {
     * )
     */
    Flight::route('POST /reset-password', function() {
-       $data = Flight::request()->data->getData();
+       try {
+           $data = Flight::request()->data->getData();
 
-       $response = Flight::auth_service()->reset_password($data);
+           $response = Flight::auth_service()->reset_password($data);
 
-       if ($response['success']) {
-           Flight::json([
-               'message' => 'Password reset successfully',
-               'data' => $response
-           ]);
-       } else {
-           Flight::halt(500, $response['error']);
+           if ($response['success']) {
+               Flight::json([
+                   'message' => 'Password reset successfully',
+                   'data' => $response
+               ], 200);
+           } else {
+               Flight::json(['error' => $response['error']], 400);
+           }
+       } catch (Exception $e) {
+           error_log("Reset password route error: " . $e->getMessage());
+           Flight::json(['error' => 'Password reset failed: ' . $e->getMessage()], 500);
        }
    });
 });

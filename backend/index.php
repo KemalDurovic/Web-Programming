@@ -2,6 +2,7 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('log_errors', 1);
 
 header('Access-Control-Allow-Origin: https://seahorse-app-sc4ki.ondigitalocean.app');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
@@ -17,15 +18,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require 'vendor/autoload.php';
 require_once __DIR__ . '/rest/config.php';
 
+error_log("========================================");
 error_log("REQUEST: " . $_SERVER['REQUEST_METHOD'] . " " . $_SERVER['REQUEST_URI']);
+error_log("========================================");
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+// Test database connection
+try {
+    $conn = Database::connect();
+    error_log("Database connection successful!");
+} catch (Exception $e) {
+    error_log("Database connection failed: " . $e->getMessage());
+    die("Database connection failed");
+}
 
 require_once __DIR__ . '/rest/services/DestinationService.php';
 Flight::register('destinationService', 'DestinationService');
