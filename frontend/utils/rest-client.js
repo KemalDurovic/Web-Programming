@@ -9,12 +9,11 @@ let RestClient = {
 
       beforeSend: function (xhr) {
         const token = localStorage.getItem("user_token");
-        console.log("TOKEN IZ LOCALSTORAGE:", token);
 
         if (token) {
-          
-          xhr.setRequestHeader("Authorization", "Bearer " + token);
-          xhr.setRequestHeader("Authentication", "Bearer " + token);
+          // Remove "Bearer " prefix if it exists, backend expects raw token
+          const cleanToken = token.replace('Bearer ', '');
+          xhr.setRequestHeader("Authentication", cleanToken);
         }
       },
 
@@ -23,8 +22,19 @@ let RestClient = {
       },
 
       error: function (jqXHR) {
+        // Handle 401 Unauthorized - redirect to login
+        if (jqXHR.status === 401) {
+          localStorage.removeItem("user_token");
+          localStorage.removeItem("user_info");
+          toastr.error("Session expired. Please login again.");
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 1500);
+          return;
+        }
+
         if (error_callback) error_callback(jqXHR);
-        else toastr.error(jqXHR?.responseJSON?.message || "Server error");
+        else toastr.error(jqXHR?.responseJSON?.message || jqXHR?.responseJSON?.error || "Server error");
       },
 
       complete: function () {
@@ -44,12 +54,11 @@ let RestClient = {
 
       beforeSend: function (xhr) {
         const token = localStorage.getItem("user_token");
-        console.log("TOKEN IZ LOCALSTORAGE:", token);
 
         if (token) {
-          
-          xhr.setRequestHeader("Authorization", "Bearer " + token);
-          xhr.setRequestHeader("Authentication", "Bearer " + token);
+          // Remove "Bearer " prefix if it exists, backend expects raw token
+          const cleanToken = token.replace('Bearer ', '');
+          xhr.setRequestHeader("Authentication", cleanToken);
         }
       },
 
@@ -58,8 +67,19 @@ let RestClient = {
       },
 
       error: function (jqXHR) {
+        // Handle 401 Unauthorized - redirect to login
+        if (jqXHR.status === 401) {
+          localStorage.removeItem("user_token");
+          localStorage.removeItem("user_info");
+          toastr.error("Session expired. Please login again.");
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 1500);
+          return;
+        }
+
         if (error_callback) error_callback(jqXHR);
-        else toastr.error(jqXHR?.responseJSON?.message || "Server error");
+        else toastr.error(jqXHR?.responseJSON?.message || jqXHR?.responseJSON?.error || "Server error");
       },
 
       complete: function () {
