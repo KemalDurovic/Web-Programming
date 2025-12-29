@@ -1,4 +1,8 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 header('Access-Control-Allow-Origin: https://seahorse-app-sc4ki.ondigitalocean.app');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authentication, Authorization');
@@ -49,21 +53,29 @@ Flight::route('GET /debug/routes', function(){
     Flight::json(Flight::router()->getRoutes());
 });
 
+// Load auth routes BEFORE middleware
 require_once __DIR__ . '/rest/routes/AuthRoutes.php';
 
-Flight::route('/*', function() {
+// Authentication middleware for protected routes
+Flight::before('start', function() {
     $url = Flight::request()->url;
     
-    if(
-        $url === '/' ||
-        $url === '' ||
-        strpos($url, '/auth/login') === 0 ||
-        strpos($url, '/auth/register') === 0 ||
-        strpos($url, '/debug/routes') === 0
-    ) {
-        return TRUE;
+    // Skip authentication for public routes
+    $publicRoutes = ['/', '', '/debug/routes'];
+    
+    // Check if it's an auth route
+    if (strpos($url, '/auth/') !== false) {
+        return true;
     }
     
+    // Check if it's a public route
+    foreach ($publicRoutes as $route) {
+        if ($url === $route) {
+            return true;
+        }
+    }
+    
+    // For all other routes, require authentication
     try {
         $token = Flight::request()->getHeader("Authentication");
         if(!$token) {
@@ -74,7 +86,7 @@ Flight::route('/*', function() {
 
         Flight::set('user', $decoded_token->user);
         Flight::set('jwt_token', $token);
-        return TRUE;
+        return true;
     } catch (\Exception $e) {
         Flight::halt(401, json_encode(['error' => $e->getMessage()]));
     }
